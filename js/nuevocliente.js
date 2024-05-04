@@ -35,11 +35,14 @@
             empresa,
             id: Date.now()
         }
-        crearNuevoCliente(cliente);
+        conectarDB(db => {
+            crearNuevoCliente(db, cliente)
+        });
+       
     }
 
-    function crearNuevoCliente(cliente) {
-        const transaction = DB.transaction(['crm'], 'readwrite');
+    function crearNuevoCliente(db,cliente) {
+        const transaction = db.transaction(['crm'], 'readwrite');
 
         const objectStore = transaction.objectStore('crm');
 
@@ -47,11 +50,13 @@
 
         transaction.onerror = function() {
             imprimirAlerta('Hubo un error', 'error');
+            transaction.db.close();
         }
 
         transaction.oncomplete = function() {
             
             imprimirAlerta('El cliente se agregó correctamente');
+            transaction.db.close();
 
             setTimeout( () => {
                 window.location.href = 'index.html'

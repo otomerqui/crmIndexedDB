@@ -1,4 +1,4 @@
-function conectarDB() {
+function conectarDB(callback) {
     const abrirConexion = window.indexedDB.open('crm', 1);
 
     abrirConexion.onerror = function() {
@@ -6,7 +6,11 @@ function conectarDB() {
     };
 
     abrirConexion.onsuccess = function() {
-        DB = abrirConexion.result;
+        console.log('Conexion establecida');
+        const db = abrirConexion.result;
+        if (callback) {
+            return callback(db);
+        }
     }
 }
 
