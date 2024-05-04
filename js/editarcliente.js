@@ -50,7 +50,7 @@
         objectStore.put(clienteActualizado);
 
         transaction.oncomplete = function() {
-            imprimirAlerta('Editado correctamente');
+            imprimirAlerta('Correctly edited');
 
             setTimeout( () => {
                 window.location.href = 'index.html';

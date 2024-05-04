@@ -23,7 +23,7 @@
 
         if(nombre === '' || email === '' || telefono === '' || empresa === '') {
             console.log('error');
-            imprimirAlerta('Todos los campos son obligatorios', 'error');
+            imprimirAlerta('All fields are required', 'error');
             return;
         }
 
@@ -49,13 +49,13 @@
         objectStore.add(cliente);
 
         transaction.onerror = function() {
-            imprimirAlerta('Hubo un error', 'error');
+            imprimirAlerta('There was an error', 'error');
             transaction.db.close();
         }
 
         transaction.oncomplete = function() {
             
-            imprimirAlerta('El cliente se agregó correctamente');
+            imprimirAlerta('Customer was added successfully');
             transaction.db.close();
 
             setTimeout( () => {
